@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  proxy:
+    image: my_rtpproxy:latest
+    container_name: my_rtpproxy
+    environment:
+      - PUBLIC_IP=${PUBLIC_IP}
+      - START_PORT=${START_PORT}
+      - END_PORT=${END_PORT}
+    ports:
+      - "8844:8844/udp"
+      - "10021-10040:10021-10040/udp"
+    networks:
+      voice_network:
+        ipv4_address: 10.0.0.31
+
+networks:
+  voice_network:
+    external: true
